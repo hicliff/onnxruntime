@@ -1254,7 +1254,7 @@ namespace Microsoft.ML.OnnxRuntime.Tests
             {
                 var container = new List<NamedOnnxValue>();
                 var tensorIn = new DenseTensor<Float16>(
-                    new Float16[] { 15360, 16384, 16896, 17408, 17664 }, new int[] { 1, 5 });
+                    new Float16[] { new Float16(15360), new Float16(16384), new Float16(16896), new Float16(17408), new Float16(17664) }, new int[] { 1, 5 });
                 var nov = NamedOnnxValue.CreateFromTensor("input", tensorIn);
                 container.Add(nov);
                 using (var res = session.Run(container))
@@ -2064,7 +2064,7 @@ namespace Microsoft.ML.OnnxRuntime.Tests
             public ushort tolerance = 0;
             public bool Equals(Float16 x, Float16 y)
             {
-                return Math.Abs(x - y) <= (tolerance + y);
+                return x == y;
             }
             public int GetHashCode(Float16 x)
             {
@@ -2077,7 +2077,7 @@ namespace Microsoft.ML.OnnxRuntime.Tests
             public ushort tolerance = 0;
             public bool Equals(BFloat16 x, BFloat16 y)
             {
-                return Math.Abs(x - y) <= (tolerance + y);
+                return x.value == y.value;
             }
             public int GetHashCode(BFloat16 x)
             {
