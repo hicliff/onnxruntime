@@ -106,6 +106,8 @@ export interface TensorFromUrlOptions extends OptionsDimensions, OptionResizedDi
 export interface TensorFromImageBitmapOptions extends OptionResizedDimensions, OptionsTensorFormat, OptionsTensorLayout,
                                                       OptionsTensorDataType, OptionsNormalizationParameters {}
 
+export interface TensorFromTextureOptions extends OptionsDimensions /* TODO: add more */ {}
+
 export interface TensorFactory {
   /**
    * create a tensor from an ImageData object
@@ -165,4 +167,11 @@ export interface TensorFactory {
    */
   fromImage(bitmap: ImageBitmap, options: TensorFromImageBitmapOptions):
       Promise<TypedTensor<'float32'>|TypedTensor<'uint8'>>;
+
+  /**
+   * TBD
+   * @param texture
+   * @param options
+   */
+  fromTexture(texture: WebGLTexture, options: TensorFromTextureOptions): Promise<TypedTensor<'float32'>>;
 }
